@@ -116,19 +116,19 @@ sudo docker build -t  docker_worker:1.6 .
 ```bash
 sudo docker volume create vm1-headnode
 sudo docker volume create vm2-worker
-docker network create -d bridge net-for-hadoop
+sudo docker network create -d bridge net-for-hadoop
 ```
 #### 6) Первый докер образ необходимо запускать с помощью следующей команды
 ```bash
-docker run --name vm1-headnode -v vm1-headnode:/opt/hadoop  --network=net-for-hadoop -p 9870:9870 -p 8088:8088 --add-host vm1-headnode:0.0.0.0 -d docker_headnode:1.6
+sudo docker run --name vm1-headnode -v vm1-headnode:/opt/hadoop  --network=net-for-hadoop -p 9870:9870 -p 8088:8088 --add-host vm1-headnode:0.0.0.0 -d docker_headnode:1.6
 ```
 #### 7) Перед запуском воторого докера необходимо посмотреть какой у певого ip с помощью команды
 ```bash
-docker inspect vm1-headnode | grep  IPAddress    
+sudo docker inspect vm1-headnode | grep  IPAddress    
 ```
 #### 8) Второй докер образ необходимо запускать с помощью следующей команды (вместо моего ip `172.18.0.2` необходимо вводить ip который вывелся на 7 этапе)
 ```bash
-docker run -v vm2-worker:/opt/hadoop --network=net-for-hadoop --add-host vm1-headnode:172.18.0.2 -d docker_worker:1.6
+sudo docker run --name vm2-worker -v vm2-worker:/opt/hadoop --network=net-for-hadoop --add-host vm1-headnode:172.18.0.2 -d docker_worker:1.6
 ```
 #### После всего проделанного можно проверять наши `VOLUMES` с помощью команд
 ```bash
@@ -140,8 +140,8 @@ sudo ls /var/lib/docker/volumes/vm2-worker/_data/
 
 #### Информация Docker Hub 
 ```bash
-studentnv/docker_worker:1.6
 studentnv/docker_headnode:1.6  
+studentnv/docker_worker:1.6
 ```
 #### Зная себя на всякий случай оставлю это здесь
 ```bash
