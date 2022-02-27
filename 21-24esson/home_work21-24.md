@@ -148,5 +148,35 @@ studentnv/docker_worker:1.6
 https://hub.docker.com/repository/docker/studentnv/docker_headnode
 https://hub.docker.com/repository/docker/studentnv/docker_worker
 ```
+#### 9) docker-compose
+```bash
+version: '3.7'
+services:
+  vm1-headnode:
+    container_name: vm1-headnode
+    image: docker_headnode:1.6
+    expose:
+      - "9870"
+      - "8088"
+    ports:
+      - "9870:9870"
+      - "8088:8088"
+    networks:
+      - net-for-hadoop
+    volumes:
+      - ./data:/opt/hadoop
+
+
+  vm2-worker:
+    container_name: vm2-worker
+    image: docker_worker:1.6
+    networks:
+      - net-for-hadoop
+    volumes:
+      - ./data:/opt/hadoop
+networks:
+  net-for-hadoop:
+    driver: bridge
+    name: net-for-hadoop
+```
 ### p.s. Докер файлы очень плохо написаны, но "причесать" их не было времени, понимаю что много личшнего таких как пользователи и директории.
-### Docker-compose просто не успел написать. Хоть понимаю что через него было бы намного лучше!
