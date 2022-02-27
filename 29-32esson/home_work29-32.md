@@ -14,13 +14,13 @@
 
 ### Task 3
 #### Something old in a new way :). Self-study positional arguments for Python scripts (sys.argv). Write a script that takes a list of words (or even phrases)aScript should ask a user to write something to stdin until user won't provide one of argument phrases.
-> https://github.com/studentNV/chapter-2/blob/lesson29-32/29-32esson/Task3.py
-> 
+> https://github.com/studentNV/chapter-2/blob/lesson29-32/29-32esson/Task3.py  
 > Start for exemple `python Task3.py "Hello world" "Penguins are not slaves" "Dogs love hot dogs"`
 
 ### Task 4
 #### We took a little look on os module. Write a small script which will print a string using all the types of string formatting which were considered during the lecture with the following context: This script has the following PID: <ACTUAL_PID_HERE>. It was ran by <ACTUAL_USERNAME_HERE> to work happily on <ACTUAL_OS_NAME>-<ACTUAL_OS_RELEASE>.
-> https://github.com/studentNV/chapter-2/blob/lesson29-32/29-32esson/Task4.py
+> https://github.com/studentNV/chapter-2/blob/lesson29-32/29-32esson/Task4.py  
+> I am not sure about this. I remember that we used only `pp` for formatetion
 
 ### Task 5
 #### Develop a function that takes a list of integers (by idea not in fact) as an argument and returns list of top-three max integers. If passed list contains not just integers collect them and print the following error message: You've passed some extra elements that I can't parse: [<"elem1", "elem2" .... >]. If return value will have less than 3 elements for some reason it's ok and shouldn't cause any problem, but some list should be returned in any case.
