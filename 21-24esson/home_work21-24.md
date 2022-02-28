@@ -149,8 +149,19 @@ https://hub.docker.com/repository/docker/studentnv/docker_headnode
 https://hub.docker.com/repository/docker/studentnv/docker_worker
 ```
 #### 9) docker-compose
+> после запуска `docker-compose` создасться сеть и два `volumes`
 ```bash
-version: '3.7'
+net-for-hadoop
+compose_data-volume-headnode
+compose_data-volume-worker
+```
+> в папке с файлом `docker-compose.yml` прописываем данную строку
+```bash
+docker-compose up -d
+```
+```bash
+version: '3.9'
+
 services:
   vm1-headnode:
     container_name: vm1-headnode
@@ -164,8 +175,7 @@ services:
     networks:
       - net-for-hadoop
     volumes:
-      - ./data:/opt/hadoop
-
+      - data-volume-headnode:/opt
 
   vm2-worker:
     container_name: vm2-worker
@@ -173,10 +183,20 @@ services:
     networks:
       - net-for-hadoop
     volumes:
-      - ./data:/opt/hadoop
+      - data-volume-worker:/opt
+
 networks:
   net-for-hadoop:
     driver: bridge
     name: net-for-hadoop
+
+volumes:
+  data-volume-headnode:
+  data-volume-worker:
+```
+> после запуска `docker-compose` можно проверять наши `volume` с помощью команд:
+```bash
+ls /var/lib/docker/volumes/compose_data-volume-headnode/_data/hadoop/
+ls /var/lib/docker/volumes/compose_data-volume-worker/_data/hadoop/
 ```
 ### p.s. Докер файлы очень плохо написаны, но "причесать" их не было времени, понимаю что много личшнего таких как пользователи и директории.
