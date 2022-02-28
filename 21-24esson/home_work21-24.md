@@ -159,6 +159,7 @@ compose_data-volume-worker
 ```bash
 docker-compose up -d
 ```
+> Содержимое файла `docker-compose.yml`
 ```bash
 version: '3.9'
 
