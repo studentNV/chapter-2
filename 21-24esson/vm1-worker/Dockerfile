@@ -34,7 +34,7 @@ RUN mkdir /usr/local/hadoop/current/hadoop-3.1.2/logs && \
 RUN touch /usr/local/hadoop/current/hadoop-3.1.2/etc/hadoop/start-datanode-nodemanager.sh && \
     echo "#!/bin/bash" >> /usr/local/hadoop/current/hadoop-3.1.2/etc/hadoop/start-datanode-nodemanager.sh && \
     echo "su -l hdfs -c \"/usr/local/hadoop/current/hadoop-3.1.2/bin/hdfs --daemon start datanode\"" >> /usr/local/hadoop/current/hadoop-3.1.2/etc/hadoop/start-datanode-nodemanager.sh && \
-    echo "su -l yarn -c \"/usr/local/hadoop/current/hadoop-3.1.2/bin/yarn --daemon start nodemanager\"" >> /usr/local/hadoop/current/hadoop-3.1.2/etc/hadoop/start-datanode-nodemanager.sh.sh && \
+    echo "su -l yarn -c \"/usr/local/hadoop/current/hadoop-3.1.2/bin/yarn --daemon start nodemanager\"" >> /usr/local/hadoop/current/hadoop-3.1.2/etc/hadoop/start-datanode-nodemanager.sh && \
     echo "while :" >> /usr/local/hadoop/current/hadoop-3.1.2/etc/hadoop/start-datanode-nodemanager.sh && \
     echo "do" >> /usr/local/hadoop/current/hadoop-3.1.2/etc/hadoop/start-datanode-nodemanager.sh && \
     echo "sleep 10" >> /usr/local/hadoop/current/hadoop-3.1.2/etc/hadoop/start-datanode-nodemanager.sh && \
