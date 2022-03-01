@@ -26,7 +26,7 @@ RUN yum install wget -y && \
     sed -i 's|%DATANODE_DIRS%|/opt/hadoop/mount1/datanode-dir,/opt/hadoop/mount2/datanode-dir|'  /usr/local/hadoop/current/hadoop-3.1.2/etc/hadoop/hdfs-site.xml && \
     wget https://gist.githubusercontent.com/Stupnikov-NA/ba87c0072cd51aa85c9ee6334cc99158/raw/bda0f760878d97213196d634be9b53a089e796ea/yarn-site.xml -O /usr/local/hadoop/current/hadoop-3.1.2/etc/hadoop/yarn-site.xml  && \
     sed -i 's|%YARN_RESOURCE_MANAGER_HOSTNAME%|vm1-headnode|' /usr/local/hadoop/current/hadoop-3.1.2/etc/hadoop/yarn-site.xml && \
-    sed -i 's|%NODE_MANAGER_LOCAL_DIR%|/opt/hadoop/mount1/nodemanager-local-dir,/opt/hadoopmount2/nodemanager-local-dir|' /usr/local/hadoop/current/hadoop-3.1.2/etc/hadoop/yarn-site.xml && \
+    sed -i 's|%NODE_MANAGER_LOCAL_DIR%|/opt/hadoop/mount1/nodemanager-local-dir,/opt/hadoop/mount2/nodemanager-local-dir|' /usr/local/hadoop/current/hadoop-3.1.2/etc/hadoop/yarn-site.xml && \
     sed -i 's|%NODE_MANAGER_LOG_DIR%|/opt/hadoop/mount1/nodemanager-log-dir,/opt/hadoop/mount2/nodemanager-log-dir|' /usr/local/hadoop/current/hadoop-3.1.2/etc/hadoop/yarn-site.xml
 RUN mkdir /usr/local/hadoop/current/hadoop-3.1.2/logs && \
     chown -R :hadoop /usr/local/hadoop/current/hadoop-3.1.2/logs && \
