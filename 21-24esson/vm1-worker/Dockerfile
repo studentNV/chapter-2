@@ -7,13 +7,16 @@ RUN yum install java-1.8.0-openjdk -y && \
     rm hadoop-3.1.2.tar.gz && \
     useradd hadoop && useradd yarn && useradd hdfs && \
     usermod -a -G hadoop hdfs && \
-    usermod -a -G hadoop yarn
-RUN mkdir -p /opt/hadoop/mount1/datanode-dir /opt/hadoop/mount2/datanode-dir && \
-    chown hdfs:hadoop /opt/hadoop/mount1/datanode-dir/ /opt/hadoop/mount2/datanode-dir/
-RUN mkdir -p /usr/local/hadoop/current/ && \
+    usermod -a -G hadoop yarn && \
+    mkdir -p /opt/hadoop/mount1/datanode-dir /opt/hadoop/mount2/datanode-dir && \
+    chown hdfs:hadoop /opt/hadoop/mount1/datanode-dir/ /opt/hadoop/mount2/datanode-dir/ && \
+    mkdir -p /usr/local/hadoop/current/ && \
     ln -s /opt/hadoop-3.1.2/* /usr/local/hadoop/current/ && \
     mkdir -p /opt/hadoop/mount1/nodemanager-local-dir /opt/hadoop/mount2/nodemanager-local-dir /opt/hadoop/mount1/nodemanager-log-dir /opt/hadoop/mount2/nodemanager-log-dir && \
-    chown yarn:hadoop /opt/hadoop/mount1/nodemanager-local-dir /opt/hadoop/mount2/nodemanager-local-dir /opt/hadoop/mount1/nodemanager-log-dir /opt/hadoop/mount2/nodemanager-log-dir
+    chown yarn:hadoop /opt/hadoop/mount1/nodemanager-local-dir /opt/hadoop/mount2/nodemanager-local-dir /opt/hadoop/mount1/nodemanager-log-dir /opt/hadoop/mount2/nodemanager-log-dir && \
+    mkdir /usr/local/hadoop/current/hadoop-3.1.2/logs && \
+    chown -R :hadoop /usr/local/hadoop/current/hadoop-3.1.2/logs && \
+    chmod -R g+wxr /usr/local/hadoop/current/hadoop-3.1.2/logs
 RUN yum install wget -y && \
     wget https://gist.githubusercontent.com/rdaadr/2f42f248f02aeda18105805493bb0e9b/raw/6303e424373b3459bcf3720b253c01373666fe7c/hadoop-env.sh -O /usr/local/hadoop/current/hadoop-3.1.2/etc/hadoop/hadoop-env.sh  && \
     sed -i 's|"%PATH_TO_OPENJDK8_INSTALLATION%"|/usr/lib/jvm/jre-1.8.0-openjdk|' /usr/local/hadoop/current/hadoop-3.1.2/etc/hadoop/hadoop-env.sh && \
@@ -28,11 +31,9 @@ RUN yum install wget -y && \
     sed -i 's|%YARN_RESOURCE_MANAGER_HOSTNAME%|vm1-headnode|' /usr/local/hadoop/current/hadoop-3.1.2/etc/hadoop/yarn-site.xml && \
     sed -i 's|%NODE_MANAGER_LOCAL_DIR%|/opt/hadoop/mount1/nodemanager-local-dir,/opt/hadoop/mount2/nodemanager-local-dir|' /usr/local/hadoop/current/hadoop-3.1.2/etc/hadoop/yarn-site.xml && \
     sed -i 's|%NODE_MANAGER_LOG_DIR%|/opt/hadoop/mount1/nodemanager-log-dir,/opt/hadoop/mount2/nodemanager-log-dir|' /usr/local/hadoop/current/hadoop-3.1.2/etc/hadoop/yarn-site.xml
-RUN mkdir /usr/local/hadoop/current/hadoop-3.1.2/logs && \
-    chown -R :hadoop /usr/local/hadoop/current/hadoop-3.1.2/logs && \
-    chmod -R g+wxr /usr/local/hadoop/current/hadoop-3.1.2/logs
 RUN touch /usr/local/hadoop/current/hadoop-3.1.2/etc/hadoop/start-datanode-nodemanager.sh && \
     echo "#!/bin/bash" >> /usr/local/hadoop/current/hadoop-3.1.2/etc/hadoop/start-datanode-nodemanager.sh && \
+    echo "sleep 60" >> /usr/local/hadoop/current/hadoop-3.1.2/etc/hadoop/start-datanode-nodemanager.sh && \
     echo "su -l hdfs -c \"/usr/local/hadoop/current/hadoop-3.1.2/bin/hdfs --daemon start datanode\"" >> /usr/local/hadoop/current/hadoop-3.1.2/etc/hadoop/start-datanode-nodemanager.sh && \
     echo "su -l yarn -c \"/usr/local/hadoop/current/hadoop-3.1.2/bin/yarn --daemon start nodemanager\"" >> /usr/local/hadoop/current/hadoop-3.1.2/etc/hadoop/start-datanode-nodemanager.sh && \
     echo "while :" >> /usr/local/hadoop/current/hadoop-3.1.2/etc/hadoop/start-datanode-nodemanager.sh && \
