@@ -1,0 +1,4 @@
+- hosts: all
+  become: yes
+  roles:
+    - 4_3_Install_MYSQL

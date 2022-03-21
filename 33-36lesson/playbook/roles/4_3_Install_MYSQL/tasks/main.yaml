@@ -1,0 +1,44 @@
+---
+- name: Download repo
+  ansible.builtin.get_url:
+    url: https://dev.mysql.com/get/mysql80-community-release-el7-5.noarch.rpm
+    dest: /opt/mysql80-community-release-el7-5.noarch.rpm
+
+- name: Install package mysql
+  ansible.builtin.yum:
+    name: /opt/mysql80-community-release-el7-5.noarch.rpm
+    state: present
+
+- name: Install mysql
+  ansible.builtin.yum:
+    update_cache: yes
+    name: 
+      - mysql-server
+      - mysql
+      - MySQL-python
+    state: latest
+
+- name: start up the mysqld service
+  service:
+    name: mysqld
+    state: started
+    enabled: true  
+
+- name: copy my.cnf
+  template:
+    src: my.cnf.j2
+    dest: /root/.my.cnf
+    mode: 0644
+
+- name: Create a new database with name 'nvAnsible'
+  community.mysql.mysql_db:
+    name: nvAnsible
+    state: present
+
+- name: Create database user with password and all database privileges and 'WITH GRANT OPTION'
+  community.mysql.mysql_user:
+    name: nvAnsible
+    password: 123
+    priv: '*.*:ALL,GRANT'
+    state: present
+

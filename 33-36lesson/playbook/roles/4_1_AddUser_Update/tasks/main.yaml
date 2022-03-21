@@ -1,0 +1,9 @@
+---
+- name: Add new user "nvAnsible"
+  ansible.builtin.user:
+    name: nvAnsible
+    group: wheel
+- name: Upgrade all packages
+  ansible.builtin.yum:
+    name: '*'
+    state: latest
