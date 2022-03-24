@@ -1,4 +1,4 @@
 ---
-#- import_playbook: AddUser_Update.yaml
-#- import_playbook: Install_FTP.yaml
+- import_playbook: AddUser_Update.yaml
+- import_playbook: Install_FTP.yaml
 - import_playbook: Install_MYSQL.yaml

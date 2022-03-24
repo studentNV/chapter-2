@@ -1,7 +1,7 @@
 ---
-- name: Add new user "nvAnsible"
+- name: Add new user "{{ name_new_user }}"
   ansible.builtin.user:
-    name: nvAnsible
+    name: "{{ name_new_user }}"
     group: wheel
 - name: Upgrade all packages
   ansible.builtin.yum:

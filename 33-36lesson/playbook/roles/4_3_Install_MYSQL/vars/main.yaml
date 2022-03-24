@@ -1,0 +1,4 @@
+---
+mysql_name_DB: test_DB
+mysql_name_user: nvAnsible
+mysql_password_user: "123"
