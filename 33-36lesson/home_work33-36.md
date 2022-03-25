@@ -43,11 +43,9 @@ ansible all -i invetory_ad_hac.yaml -k -u root -m copy -a "src=/home/nvAnsible/.
 ```
 
 - дать возможность использовать sudo (помните о том, что редактирование /etc/sudoers не через visudo - плохая идея)
-> добавляем пользователя в группу администраторов `wheel`
 > не нашел каким образом редактировать файл `/etc/sudoers` через `visudo` с помощью `Ansible`, если подскажите буду благодарен (выкрутился по другому)
 ```bash
-ansible all -i invetory_ad_hac.yaml -k -u root -m user -a "name=nvAnsible group=wheel createhome=yes"
-ansible all -i invetory_ad_hac.yaml -k -u root -m shell -a "echo 'nvAnsible  ALL=(ALL) NOPASSWD:ALL' | sudo tee /etc/sudoers.d/nvAnsible"
+ansible all -i invetory_ad_hac.yaml -k -u root -m shell -a "echo 'nvAnsible  ALL=(ALL) NOPASSWD:ALL' | tee /etc/sudoers.d/nvAnsible"
 ```
 4. написать плейбук, со ролями, которые позволят:
 - создать пользователя из п.2; обновить все пакеты в системе
