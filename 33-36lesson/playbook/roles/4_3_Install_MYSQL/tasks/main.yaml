@@ -1,12 +1,7 @@
 ---
-- name: Download repo
-  ansible.builtin.get_url:
-    url: http://repo.mysql.com/mysql-community-release-el6-5.noarch.rpm
-    dest: /opt/mysql-community-release-el6-5.noarch.rpm
-
-- name: Install package mysql
-  ansible.builtin.yum:
-    name: /opt/mysql-community-release-el6-5.noarch.rpm
+- name: Install the nginx rpm from a remote repo
+  yum:
+    name: http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm
     state: present
 
 - name: Install mysql
