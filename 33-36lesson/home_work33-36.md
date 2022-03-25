@@ -23,7 +23,7 @@ sudo su nvAnsible
 ```
 
 3. Используя ansible ad-hoc:
-> содержимое `invetory_ad_hac.yaml` находиться тут -> https://github.com/studentNV/chapter-2/blob/lesson33-36/33-36lesson/playbook/invetory_ad_hac.yaml
+> содержимое `invetory_ad_hac.yaml` находится тут -> https://github.com/studentNV/chapter-2/blob/lesson33-36/33-36lesson/playbook/invetory_ad_hac.yaml
 
 - создать такого же пользователя на остальных машинах
 ```bash
@@ -36,7 +36,7 @@ ansible all -i invetory_ad_hac.yaml -k -u root -m ansible.builtin.user -a "name=
 [nvAnsible@localhost hw]$ ssh-keygen
 
 ```
-> перекидаваем публичный ключь
+> перекидаваем публичный ключ
 ```bash
 ansible all -i invetory_ad_hac.yaml -k -u root -m file -a "path=/home/nvAnsible/.ssh owner=nvAnsible group=nvAnsible state=directory" -b
 ansible all -i invetory_ad_hac.yaml -k -u root -m copy -a "src=/home/nvAnsible/.ssh/id_rsa.pub mode=400 owner=nvAnsible group=nvAnsible dest=/home/nvAnsible/.ssh/authorized_keys"
