@@ -166,7 +166,8 @@ To https://github.com/studentNV/git-lesson.git
    6d34e0b..4ac0fe2  feat1-add-readme -> feat1-add-readme
 ```
 5. Сделать Pull-Request из ветки "feat1-add-readme" в "master" и добавить меня (@vauboy) ревьювером
-> не могу вас добавить ревьювером пока вы не примите приглашение на `collaborates` (в ином случае у меня просто пустой список на добавление в ревьюверы)
+> не могу вас добавить ревьювером пока вы не примите приглашение на `collaborates` (в ином случае у меня просто пустой список на добавление в ревьюверы) репозиторий публичный проверил перейдя на пулл реквест с другого акаунта на `git-hub`
+> https://github.com/studentNV/git-lesson/pull/1
 
 ### Задача 3. Знакомство с GitLab Community Edition
 
