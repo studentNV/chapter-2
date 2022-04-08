@@ -3,6 +3,7 @@
 ## Home work 2.5
 
 ### Задание 1. Настройка Jenkins
+> Вы просили все в архив кинуть, мне показалось что так более удобно, если что архив тут -> https://github.com/studentNV/chapter-2/blob/lesson39-40/39-40esson/screen.7z
 1. Развернуть контроллер Jenkins, произведя его базовую настройку.
 ![image](https://user-images.githubusercontent.com/95025513/162426354-938eea60-bc15-4827-8877-39cab306c51e.png)
 
