@@ -47,6 +47,17 @@ sudo docker run -p 5000:5000 -d docker_exam2_centos_web:1.6
 sudo docker build -t docker_exam2_slim_web:1.6 .
 sudo docker run -p 5000:5000 -d docker_exam2_slim_web:1.6
 ```
-> Docker files:		
+> Docker files:	
 > dockerfile_centos_web -> https://github.com/studentNV/chapter-2/blob/main/exam/dockerfile_centos_web/Dockerfile
 > dockerfile_slim_web -> https://github.com/studentNV/chapter-2/blob/main/exam/dockerfile_slim_web/Dockerfile
+4.	Запустить и выполнить первоначальную настройку Jenkins, работающего внутри docker-контейнера. Для выполнения данного пункта можно воспользоваться официальным docker образом Jenkins.
+```bash
+========Start docker Jenkins=========
+sudo docker run -p 8080:8080 -p 50000:50000 --name jenkins_exam jenkins/jenkins:latest
+sudo docker run -p 8080:8080 -p 50000:50000 --name jenkins_exam -v /home/sit/docker_jenkins:/var/jenkins_home jenkins/jenkins:latest
+-p 5000:5000 required to attach slave servers; port 50000 is used to communicate between master and slaves
+created user: sitis
+password: 123
+========Experiment start docker jenkins with docker web=========
+sudo docker run -p 5050:5000 -d docker_exam2_slim_web:1.6
+```
