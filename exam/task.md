@@ -1,3 +1,4 @@
+
 ## Задача:
 1.	Форкнуть GitHub репозиторий (web-приложение) по адресу https://github.com/merovigen/student-exam2 в личный GitHub репозиторий.
 > Переходим в нужный рипозиторий и справа сверху жмём кнопку `Fork`. Далее идём в свой личный репозиторий и проверяем рузультат `https://github.com/studentNV/student-exam2`
@@ -48,16 +49,26 @@ sudo docker build -t docker_exam2_slim_web:1.6 .
 sudo docker run -p 5000:5000 -d docker_exam2_slim_web:1.6
 ```
 > Docker files:	
-> dockerfile_centos_web -> https://github.com/studentNV/chapter-2/blob/main/exam/dockerfile_centos_web/Dockerfile
-> dockerfile_slim_web -> https://github.com/studentNV/chapter-2/blob/main/exam/dockerfile_slim_web/Dockerfile
+> dockerfile_centos_web -> https://github.com/studentNV/chapter-2/blob/main/exam/dockerfile_centos_web/Dockerfile   
+> dockerfile_slim_web -> https://github.com/studentNV/chapter-2/blob/main/exam/dockerfile_slim_web/Dockerfile  
 4.	Запустить и выполнить первоначальную настройку Jenkins, работающего внутри docker-контейнера. Для выполнения данного пункта можно воспользоваться официальным docker образом Jenkins.
 ```bash
 ========Start docker Jenkins=========
 sudo docker run -p 8080:8080 -p 50000:50000 --name jenkins_exam jenkins/jenkins:latest
 sudo docker run -p 8080:8080 -p 50000:50000 --name jenkins_exam -v /home/sit/docker_jenkins:/var/jenkins_home jenkins/jenkins:latest
+sudo docker start jenkins_exam
 -p 5000:5000 required to attach slave servers; port 50000 is used to communicate between master and slaves
 created user: sitis
 password: 123
 ========Experiment start docker jenkins with docker web=========
 sudo docker run -p 5050:5000 -d docker_exam2_slim_web:1.6
 ```
+5.	Создать пользователей admin и developer, включить matrix access и настроить права доступа:      
+•	admin – полные права на все     
+•	developer:      
+i.	Overall: read       
+ii.	Job: build, cancel, discover, read, workspace       
+iii.	Agent: build  
+
+![image](https://user-images.githubusercontent.com/95025513/162625705-7f6626c0-c8aa-4359-96e1-78db47dd85b5.png)
+
