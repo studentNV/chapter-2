@@ -9,4 +9,4 @@ RUN     yum update -y && \
         pip3 install flask
 ENV  FLASK_APP=student-exam2/js_example
 ENV  LC_ALL=en_US.utf-8
-ENTRYPOINT ["flask" "run" "--host=0.0.0.0"]
+ENTRYPOINT flask run --host=0.0.0.0
