@@ -1,4 +1,5 @@
 FROM centos:7
+# for become agent
 RUN yum update -y  && \
 	yum install java-1.8.0-openjdk -y  && \
 	yum install epel-release -y  && \
@@ -10,5 +11,22 @@ RUN yum update -y  && \
 	su -l Jenkins -c "cat ~/.ssh/id_rsa.pub > ~/.ssh/authorized_keys"  && \
 	chmod 644  /var/lib/Jenkins/.ssh/authorized_keys  && \
 	ssh-keygen -A
-EXPOSE 22
+	EXPOSE 22
+# for unit test
+RUN yum install git -y && \
+	git clone https://github.com/studentNV/student-exam2.git /opt/student-exam2 && \
+	chown Jenkins:Jenkins -R /opt/student-exam2 && \
+	su -l Jenkins -c "python3 -m venv /opt/student-exam2/venv" && \
+	su -l Jenkins -c "/opt/student-exam2/venv/bin/pip install --upgrade pip" && \
+	su -l Jenkins -c "/opt/student-exam2/venv/bin/pip install -e /opt/student-exam2" && \
+	pip3 install flask && \
+	FLASK_APP=opt/student-exam2/js_example && \
+	LC_ALL=en_US.utf-8
+# for docker
+RUN yum install yum-utils devicemapper-persistent-data && \
+	yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo && \
+	yum install -y docker-ce && \
+	echo "Jenkins ALL=(ALL:ALL) NOPASSWD:/usr/bin/docker" >> /etc/sudoers && \
+	echo "root ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers && \
+	yum install sudo -y
 ENTRYPOINT ["/usr/sbin/sshd","-D"]
