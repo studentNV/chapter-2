@@ -81,7 +81,7 @@ iii.	Agent: build
 > `Dockerfile` -> https://github.com/studentNV/chapter-2/blob/main/exam/jenkins_agent_ansible/Dockerfile
 ```bash
 sudo docker build -t jenkins_agent_ansible:jenkins_agent .
-sudo docker run --name jenkins_agent_ansible -d jenkins_agent_ansible:jenkins_agent
+sudo docker run --privileged=true --name jenkins_agent -v /var/run/docker.sock:/var/run/docker.sock  -d studentnv/exam2:jenkins_agent
 ```
 > Для получения ключа и IP адреса используемые команды, которые нам понадобяться при подключении аегнта
 ```bash
@@ -124,3 +124,25 @@ sudo docker push studentnv/exam2:jenkins_agent
 
 ![image](https://user-images.githubusercontent.com/95025513/162733929-cf0b3765-cc7e-45fc-b1ce-b4ad4b99bcb3.png)
 ![image](https://user-images.githubusercontent.com/95025513/162734040-a43b42fe-f5f1-4245-bbe3-9a619dd2f882.png)
+
+12.	Создать Jenkins pipeline для CI:
+•	Jenkinsfile должен браться из репозитория с web-приложением
+•	Jenkins должен запускать job для каждого нового коммита в master ветку – для этого нужно включить триггер на SCM Poll и поставить ежеминутную проверку
+•	В Jenkinsfile должно быть:
+i.	Запуск python тестов
+ii.	Сборка docker image
+iii.	Аутентификация в docker hub (docker login, логин и пароль должны браться из credentials Jenkins’а)
+iv.	Выгрузка image на docker hub (docker push)
+
+> подключаем к нашему созданному `pipeline` систему контроля версий `Git` перед этим создаем `Credential` для подключения  
+![image](https://user-images.githubusercontent.com/95025513/163123373-4f60e8e0-09c7-4188-82ce-646a5d7c97f2.png)
+
+>  выставляем `Build Truggers` в `Pol CSM` и маской задаем интеревал  
+![image](https://user-images.githubusercontent.com/95025513/163123791-d51f1ffa-7ea4-48ba-967f-f58ee2f7c62a.png)
+
+> Что бы работала аутентификация в `dockerhub` серез `credentials Jenkins’а` нужно его создать
+![image](https://user-images.githubusercontent.com/95025513/163124052-58b7d980-39fa-4c68-8abe-ca50be396028.png)
+> Затем через переменную в `pipeline` передаём наши данные для входа в `dockerhub`
+> `pipeline` -> https://github.com/studentNV/student-exam2/blob/master/Jenkinsfile
+
+
