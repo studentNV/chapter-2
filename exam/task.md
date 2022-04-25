@@ -55,8 +55,6 @@ sudo systemctl status docker
 ```bash
 sudo docker build -t centos_web:web_app .
 sudo docker run --name centos_web -p 5050:5000 -d centos_web:web_
-sudo docker build -t slim_web:1.6 .
-sudo docker run -p 5000:5000 -d docker_exam2_slim_web:1.6
 ```
 
 ### 4.	Запустить и выполнить первоначальную настройку Jenkins, работающего внутри docker-контейнера. Для выполнения данного пункта можно воспользоваться официальным docker образом Jenkins.
