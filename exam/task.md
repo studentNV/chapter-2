@@ -76,7 +76,7 @@ sudo docker exec -it jenkins_exam cat /var/jenkins_home/secrets/initialAdminPass
 > После успешной установки всех предложенных плагинов создаем первого пользователя с правами администратора.  
 
 ![image](https://user-images.githubusercontent.com/95025513/164938641-e6311f4a-0c24-42d7-8c9b-4f2919b97824.png)
-На этом первоначальная настройка заканчивается.
+> На этом первоначальная настройка заканчивается.
 
 ### 5.	Создать пользователей admin и developer, включить matrix access и настроить права доступа:      
 •	admin – полные права на все     
@@ -126,7 +126,7 @@ sudo docker exec -it jenkins_agent cat /var/lib/Jenkins/.ssh/id_rsa
 ![image](https://user-images.githubusercontent.com/95025513/164940486-bffca888-1496-41fe-9c49-656dd064a461.png)
 
 ### 10.	Запустить контейнер для Jenkins агента и подключить агента к мастеру Jenkins.
-> В настройках `Jenkins` добавляем agent выбирая `credential` который создавали выше.
+> В настройках `Jenkins` добавляем `agent` выбирая `credential` который создавали выше.
 
 ![image](https://user-images.githubusercontent.com/95025513/164940738-4f6c6052-74e7-431b-9300-2962c99cb4e6.png)
 > Агент добавился корректно.
@@ -134,7 +134,7 @@ sudo docker exec -it jenkins_agent cat /var/lib/Jenkins/.ssh/id_rsa
 ![image](https://user-images.githubusercontent.com/95025513/164941098-24b19ec2-f295-4fc5-a7ee-9ed9dbbccaec.png)
 
 ### 11.	Запретить сборки на мастере Jenkins (настроить число executors на мастере равным 0)
-> Заходим в настройки мастере `Jenkins` и меняем колличество `executors`
+> Заходим в настройки мастера `Jenkins` и меняем колличество `executors`
 
 ![image](https://user-images.githubusercontent.com/95025513/164941198-1a44a73b-3554-4a31-a5f8-e8afcf3b5520.png)
 
@@ -164,8 +164,8 @@ iv.	Выгрузка image на docker hub (docker push)
 > `Pipeline` ->  https://github.com/studentNV/student-exam2/blob/master/Jenkinsfile
 
 ### 13. Создать Git репозиторий с Ansible. Добавить в него список используемых серверов в inventory, роль для установки вашего web-приложение и роль для установки балансировщика на базе Nginx.
-•	Роль для web-приложения должна устанавливать docker, скачивать образ web-приложения и запускать контейнер на определенном порту.
-•	Роль для Nginx должна устанавливать docker, скачивать образ Nginx, генерировать конфигурационный файл Nginx из Jinja2 шаблона для балансировки ваших web-приложений.
+•	Роль для web-приложения должна устанавливать docker, скачивать образ web-приложения и запускать контейнер на определенном порту.  
+•	Роль для Nginx должна устанавливать docker, скачивать образ Nginx, генерировать конфигурационный файл Nginx из Jinja2 шаблона для балансировки ваших web-приложений.  
 > Было принято решение использовать отдельную виртуальную машину для `CD`. На ней был создать пользователь `Jenkins` и закинут ключ для работы `Ansible`, так же она была обновлена и на ней был установлен `Docker`. Для добавления ключа воспользуемся следующими командами.
 ```bash
 sudo docker exec -u Jenkins -it jenkins_agent ansible all -i '192.168.100.72,' -k -u root -m file -a "path=/home/Jenkins/.ssh owner=Jenkins group=Jenkins state=directory" -b
@@ -174,10 +174,10 @@ sudo docker exec -u Jenkins -it jenkins_agent ansible all -i '192.168.100.72,' -
 > `Ansible` -> https://github.com/studentNV/ansible-exam2
 
 ### 14. Создать Jenkins pipeline для CD:
-•	Jenkinsfile должен браться из репозитория с ansible
-•	В Jenkinsfile должно быть
-i.	Запуск плейбука ansible для деплоя
-ii.	Запуск интеграционных тестов (достаточно обычного http реквеста до web сервера и проверка что он возвращает статус 200)
+•	Jenkinsfile должен браться из репозитория с ansible 
+•	В Jenkinsfile должно быть 
+i.	Запуск плейбука ansible для деплоя  
+ii.	Запуск интеграционных тестов (достаточно обычного http реквеста до web сервера и проверка что он возвращает статус 200) 
 > Создаем новый pipeline и настраиваем его так же, как и в пункте `12`. Единственные изменения, меняем ссылку на репозиторий и название основной ветки.
 
 ![image](https://user-images.githubusercontent.com/95025513/164942585-e1d4b169-7130-46a2-be82-a4318784d440.png)
