@@ -21,7 +21,8 @@ RUN yum install git -y && \
 	su -l Jenkins -c "/opt/student-exam2/venv/bin/pip install -e /opt/student-exam2" && \
 	pip3 install flask && \
 	FLASK_APP=opt/student-exam2/js_example && \
-	LC_ALL=en_US.utf-8
+	LC_ALL=en_US.utf-8 && \
+	su -l Jenkins -c "/opt/student-exam2/venv/bin/pip install -e '/opt/student-exam2[test]'"
 # for docker
 RUN yum install yum-utils devicemapper-persistent-data && \
 	yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo && \
