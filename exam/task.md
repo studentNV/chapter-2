@@ -107,7 +107,7 @@ sudo docker login
 ```bash
 sudo docker tag dfbe216edce3 studentnv/exam2:web_app
 sudo docker push studentnv/exam2:web_app
-sudo docker tag a19dc781bbf3 studentnv/exam2:jenkins_agent
+sudo docker tag c97aa7d15813 studentnv/exam2:jenkins_agent
 sudo docker push studentnv/exam2:jenkins_agent
 ```
 > Далее проверяем результат.  
