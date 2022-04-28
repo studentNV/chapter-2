@@ -166,7 +166,7 @@ iv.	Выгрузка image на docker hub (docker push)
 •	Роль для Nginx должна устанавливать docker, скачивать образ Nginx, генерировать конфигурационный файл Nginx из Jinja2 шаблона для балансировки ваших web-приложений.  
 > Было принято решение использовать отдельную виртуальную машину для `CD`. На ней был создать пользователь `Jenkins` и закинут ключ для работы `Ansible`, так же она была обновлена и на ней был установлен `Docker`. Для настройки виртульаной машины для CD выполняем следующие команды.
 ```bash
-sudo docker exec -u Jenkins -it jenkins_agent ssh-keyscan 192.168.100.72 >> /var/lib/Jenkins/.ssh/known_hosts
+sudo docker exec -u root -it jenkins_agent sudo su -l Jenkins -c "ssh-keyscan 192.168.100.72 > ~/.ssh/known_hosts"
 sudo docker exec -u Jenkins -it jenkins_agent  ansible all -i '192.168.100.72,' -k -u root -m ansible.builtin.user -a "name=Jenkins"
 sudo docker exec -u Jenkins -it jenkins_agent ansible all -i '192.168.100.72,' -k -u root -m file -a "path=/home/Jenkins/.ssh owner=Jenkins group=Jenkins state=directory"
 sudo docker exec -u Jenkins -it jenkins_agent ansible all -i '192.168.100.72,' -k -u root -m copy -a "src=/var/lib/Jenkins/.ssh/id_rsa.pub mode=400 owner=Jenkins group=Jenkins dest=/home/Jenkins/.ssh/authorized_keys"
