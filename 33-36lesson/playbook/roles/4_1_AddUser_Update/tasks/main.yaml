@@ -1,0 +1,9 @@
+---
+- name: Add new user "{{ name_new_user }}"
+  ansible.builtin.user:
+    name: "{{ name_new_user }}"
+    group: wheel
+- name: Upgrade all packages
+  ansible.builtin.yum:
+    name: '*'
+    state: latest

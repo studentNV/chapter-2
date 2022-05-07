@@ -1,0 +1,12 @@
+---
+- name: Install vsftpd
+  ansible.builtin.yum:
+    name: vsftpd
+    state: present
+
+- name: Change configuration file
+  template:
+    src:   etc_vsftpd_conf
+    dest: /etc/vsftpd.conf
+    mode: '0600'
+  notify: restart vsftpd

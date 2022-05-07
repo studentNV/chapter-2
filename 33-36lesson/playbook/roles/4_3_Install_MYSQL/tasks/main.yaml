@@ -1,0 +1,31 @@
+---
+- name: Install the nginx rpm from a remote repo
+  yum:
+    name: http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm
+    state: present
+
+- name: Install mysql
+  ansible.builtin.yum:
+    update_cache: yes
+    name:
+      - mysql-server
+      - MySQL-python
+    state: latest
+
+- name: start up the mysqld service
+  service:
+    name: mysqld
+    state: started
+    enabled: true
+
+- name: Create database
+  community.mysql.mysql_db:
+    name: "{{ mysql_name_DB }}"
+    state: present
+
+- name: Create database user with name 'bob' and password '12345' with all database privileges
+  community.mysql.mysql_user:
+    name: "{{ mysql_name_user }}"
+    password: "{{ mysql_password_user }}"
+    priv: '*.*:ALL'
+    state: present

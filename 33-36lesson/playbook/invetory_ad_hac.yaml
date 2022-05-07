@@ -1,0 +1,11 @@
+all:
+  children:
+    Nodes:
+      hosts:
+        vm1-ansible:
+          ansible_host: 192.168.100.101
+          ansible_ssh_private_key_file: /home/nvAnsible/.ssh/id_rsa
+        vm2-ansible:
+          ansible_host: 192.168.100.102
+          ansible_ssh_private_key_file: /home/nvAnsible/.ssh/id_rsa
+
