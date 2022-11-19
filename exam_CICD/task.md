@@ -1,5 +1,3 @@
-![image](https://user-images.githubusercontent.com/95025513/201987660-187deacb-18fd-4b9c-98a1-fb1badb71b37.png)
-
 ## Задача:
 ### 1.	Форкнуть GitHub репозиторий (web-приложение) по адресу https://github.com/merovigen/student-exam2 в личный GitHub репозиторий.
 > Переходим в нужный рипозиторий и справа сверху жмём кнопку `Fork`. Далее идём в свой личный репозиторий и проверяем рузультат `https://github.com/studentNV/student-exam2`
