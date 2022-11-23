@@ -49,7 +49,7 @@ sudo yum install -y docker-ce
 sudo systemctl start docker && sudo systemctl enable docker
 sudo systemctl status docker
 ```
-> `Dockerfile` ->  https://github.com/studentNV/chapter-2/blob/main/exam/dockerfile_centos_web/Dockerfile  
+> `Dockerfile` ->  https://github.com/studentNV/chapter-2/blob/main/exam_CICD/dockerfile_centos_web/Dockerfile
 > Для сборки и запуска докер файла были использованы следующие команды:
 ```bash
 sudo docker build -t centos_web:web_app .
@@ -91,7 +91,7 @@ iii.	Agent: build
 ![image](https://user-images.githubusercontent.com/95025513/164938834-4f8f3217-2a74-467e-9500-7c9c0fc731cd.png)
 
 ### 7.	Для сборки и тестирования web-приложения нужно использовать не Jenkins-мастер, установленный и настроенный ранее, а специальный Jenkins-агент, работающий в отдельном docker-контейнере. Для начала нужно подготовить образ этого агента. Для этого требуется написать Dockerfile для Jenkins-агента. В образе должны присутствовать: java8, ansible, python3, пользователь Jenkins и SSH-ключ для авторизации Jenkins-мастера. Способ подключения агента – SSH.
-> `Dockerfile` -> https://github.com/studentNV/chapter-2/blob/main/exam/jenkins_agent_ansible/Dockerfile  
+> `Dockerfile` -> https://github.com/studentNV/chapter-2/blob/main/exam_CICD/jenkins_agent_ansible/Dockerfile 
 > Для сборки и запуска докер файла были использованы следующие команды:
 ```bash
 sudo docker build -t studentnv/exam2:jenkins_agent .
